@@ -131,6 +131,8 @@ play_vs_computer() {
             field[$turn]=$user_symbol
             check_winner
             check_draw
+        else
+            continue
         fi
 
         for key in "${!field[@]}"; do
