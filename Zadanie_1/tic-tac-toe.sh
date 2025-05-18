@@ -117,6 +117,33 @@ play_vs_player() {
     done
 }
 
+play_vs_computer() {
+    local user_symbol="O"
+    local comp_symbol="X"
+
+    while true; do
+        clear
+        print
+        echo " "
+        read -p "Enter your turn [row][column] ($user_symbol): " turn
+
+        if [[ -v field[$turn] ]] && [[ "${field[$turn]}" == " " ]]; then
+            field[$turn]=$user_symbol
+            check_winner
+            check_draw
+        fi
+
+        for key in "${!field[@]}"; do
+            if [[ "${field[$key]}" == " " ]]; then
+                field[$key]=$comp_symbol
+                check_winner
+                check_draw
+                break
+            fi
+        done
+    done
+}
+
 save_game() {
     local filename=$1
     if [[ $isCrossTurn -eq 1 ]]; then
@@ -166,6 +193,10 @@ while true; do
     if [ "$choose" -eq 1 ]; then
         clear_board
         play_vs_player
+    fi
+    if [ "$choose" -eq 2 ]; then
+        clear_board
+        play_vs_computer
     fi
     if [ "$choose" -eq 3 ]; then
         echo " "
