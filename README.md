@@ -4,3 +4,14 @@
 :white_check_mark: 3.0 (działa w trybie gry turowej) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/31d38df287af6594c2c9dfe074be2c0a4a8561a1) </br>
 :white_check_mark: 4.0 (pozwala na zapis i odtwarzanie przerwanej gry (save game)) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/4e63e13dc9acc5b5f70877f3293c16730a2dbb10) </br>
 :white_check_mark: 5.0 (pozwala na grę z komputerem) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/fa585b90aa6190fe1aab23c0d667729cdbfa926c) </br>
+
+**Zadanie 2: [JS] Zamek w Minecraft**
+
+[Kod](Zadanie_2/) </br>
+:white_check_mark: 3.0 (Prosty zamek wykorzystując minimum 5 różnych rodzajów bloków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
+:white_check_mark: 3.5 (Posiada mimum 4 okna) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
+:white_check_mark: 4.0 (Posiada fosę oraz most) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
+:white_check_mark: 4.5 (Posiada bramę oraz minimum 2 wieże) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
+:x: 5.0 (Zamek ma minimum dwa poziomy (piętra) na które można wejść z
+zewnątrz) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
+
