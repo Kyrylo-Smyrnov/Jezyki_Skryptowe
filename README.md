@@ -13,5 +13,15 @@
 :white_check_mark: 4.0 (Posiada fosę oraz most) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
 :white_check_mark: 4.5 (Posiada bramę oraz minimum 2 wieże) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
 :x: 5.0 (Zamek ma minimum dwa poziomy (piętra) na które można wejść z
-zewnątrz) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/d63f8ca25c9b8d6997d64f8c2397c93af43c71fc) </br>
+zewnątrz) </br>
+
+**Zadanie 3: [Lua] Tetris w Lua**
+
+[Kod](Zadanie_3/) </br>
+:white_check_mark: 3.0 (Postawowa wersja dekstopowa z obsługą na klawiaturze - minimum 4
+rodzaje klocków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/48347a74caacad90d63fdabb31135324deb384d5) </br>
+:x: 3.5 (Zapis i odczyt gier) </br>
+:x: 4.0 (Dodanie efektów dźwiękowych przy akcjach) </br>
+:x: 4.5 (Dodanie animacji przy zbijaniu klocków) </br>
+:x: 5.0 (Wersja na iOS lub Android z implementacją touch zamiast klawiatury) </br>
 
