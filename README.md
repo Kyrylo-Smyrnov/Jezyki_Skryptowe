@@ -25,3 +25,12 @@ rodzaje klocków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/comm
 :x: 4.5 (Dodanie animacji przy zbijaniu klocków) </br>
 :x: 5.0 (Wersja na iOS lub Android z implementacją touch zamiast klawiatury) </br>
 
+**Zadanie 4: [Ruby] Mario w Ruby2d**
+
+[Kod](Zadanie_4/) </br>
+:white_check_mark: 3.0 (Należy stworzyć jeden poziom z przeszkodami oraz dziurami w które
+można wpaść i zginąć) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/6dbddd387444670059045e19eb03cd6f4ab0e765) </br>
+:x: 3.5 (Należy dodać opcję zbierania punktów) </br>
+:x: 4.0 (Należy dodać przeciwników, których można zabić oraz 3 życia) </br>
+:x: 4.5 (Ładowanie poziomów z pliku) </br>
+:x: 5.0 (Generator poziomów) </br>
