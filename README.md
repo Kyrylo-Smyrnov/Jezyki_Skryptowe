@@ -34,3 +34,12 @@ można wpaść i zginąć) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryp
 :x: 4.0 (Należy dodać przeciwników, których można zabić oraz 3 życia) </br>
 :x: 4.5 (Ładowanie poziomów z pliku) </br>
 :x: 5.0 (Generator poziomów) </br>
+
+**Zadanie 5: [Python] Czatbot eSport LLM**
+
+[Kod](Zadanie_5/) </br>
+:white_check_mark: 3.0 (Nalezy zaimplementować minimum 3 ścieżki (prompt chains) turnieju e-sportowego) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/de2cf21d46a513a50abe04a9be09f1e016c3e595) </br>
+:white_check_mark: 3.5 (Bot wyświetla listę dostępnych rozgrywek) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/de2cf21d46a513a50abe04a9be09f1e016c3e595) </br>
+:white_check_mark: 4.0 (Bot dodaje zawodnika do rozgrywki) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/de2cf21d46a513a50abe04a9be09f1e016c3e595) </br>
+:white_check_mark: 4.5 (Bot potwierdza dodanie zawodnika wraz z numerem oraz szczegółami turnieju) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/de2cf21d46a513a50abe04a9be09f1e016c3e595) </br>
+:white_check_mark: 5.0 (Bot wyświetla wszystkie drużyny, stan rozgrywek oraz wszystkich zawodników w rozgrywkach) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/de2cf21d46a513a50abe04a9be09f1e016c3e595) </br>
