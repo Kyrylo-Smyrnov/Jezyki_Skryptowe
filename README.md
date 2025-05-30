@@ -30,7 +30,7 @@ rodzaje klocków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/comm
 [Kod](Zadanie_4/) </br>
 :white_check_mark: 3.0 (Należy stworzyć jeden poziom z przeszkodami oraz dziurami w które
 można wpaść i zginąć) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/6dbddd387444670059045e19eb03cd6f4ab0e765) </br>
-:x: 3.5 (Należy dodać opcję zbierania punktów) </br>
+:white_check_mark: 3.5 (Należy dodać opcję zbierania punktów) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/150bec895502f91995023062df942baf083f2474) </br>
 :x: 4.0 (Należy dodać przeciwników, których można zabić oraz 3 życia) </br>
 :x: 4.5 (Ładowanie poziomów z pliku) </br>
 :x: 5.0 (Generator poziomów) </br>
