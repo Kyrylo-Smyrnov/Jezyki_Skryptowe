@@ -9,6 +9,7 @@ class Character
         @speedX = 0
         @onGround = true
         @isAlive = true
+        @collectedPoints = 0
         @sprite = Sprite.new(
             "sprites/mario.png",
             width: 40,
@@ -55,10 +56,12 @@ class Character
     end
 
     def update(map)
+        collectPoints(map)
         handleMovement(map)
 
         @sprite.x = @posX
         @sprite.y = @posY
+
     end
 
     def posX
@@ -71,6 +74,21 @@ class Character
 
     def isAlive
         @isAlive
+    end
+
+    def collectedPoints
+        @collectedPoints
+    end
+
+    def collectPoints(map)
+
+        x = @posX + 20
+        y = @posY + 20
+
+        if map.isPointOnPos?(x, y)
+            @collectedPoints += 1
+            map.removePoint(x, y)
+        end
     end
 
     def handleMovement(map)
