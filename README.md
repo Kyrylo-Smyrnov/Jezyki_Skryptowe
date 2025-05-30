@@ -32,7 +32,7 @@ rodzaje klocków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/comm
 można wpaść i zginąć) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/6dbddd387444670059045e19eb03cd6f4ab0e765) </br>
 :white_check_mark: 3.5 (Należy dodać opcję zbierania punktów) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/150bec895502f91995023062df942baf083f2474) </br>
 :white_check_mark: 4.0 (Należy dodać przeciwników, których można zabić oraz 3 życia) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/b860b73047883dbea9513b7fea44a2e55310722b) </br>
-:x: 4.5 (Ładowanie poziomów z pliku) </br>
+:white_check_mark: 4.5 (Ładowanie poziomów z pliku) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/c3d0cbfb257a77a7c444bd20c8332c4cde2c0046) </br>
 :x: 5.0 (Generator poziomów) </br>
 
 **Zadanie 5: [Python] Czatbot eSport LLM**
