@@ -1,4 +1,5 @@
 require 'ruby2d'
+require_relative 'enemy'
 
 class Map
     TILE_SIZE = 40
@@ -8,7 +9,7 @@ class Map
     def initialize()
         @cameraOffset = 0
 
-        @points = [
+        @interactable = [
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -21,7 +22,7 @@ class Map
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         ]
@@ -48,7 +49,8 @@ class Map
         @mapSizeY = @map.length
         
         @sprites = Array.new(@mapSizeY) { Array.new(@mapSizeX) }
-        @pointsSprites = Array.new(@mapSizeY) { Array.new(@mapSizeX) }
+        @interactableSprites = Array.new(@mapSizeY) { Array.new(@mapSizeX) }
+        @enemies = []
 
         @map.each_with_index do |row, rowId|
             row.each_with_index do |tile, colId|
@@ -65,26 +67,29 @@ class Map
             end
         end
 
-        @points.each_with_index do |row, rowId|
+        @interactable.each_with_index do |row, rowId|
             row.each_with_index do |tile, colId|
                 x = TILE_SIZE * colId
                 y = TILE_SIZE * rowId
 
-                if @points[rowId][colId] != 0
+                if @interactable[rowId][colId] == 1
                     sprite = Sprite.new("sprites/coin.png", width: 40, height: 40, clip_width: 16, time: 300, loop: true)
                     sprite.play
 
                     sprite.x = x
                     sprite.y = y
  
-                    @pointsSprites[rowId][colId] = sprite
+                    @interactableSprites[rowId][colId] = sprite
+                elsif @interactable[rowId][colId] == 2
+                    @enemy = Enemy.new(colId * TILE_SIZE, rowId * TILE_SIZE)
+                    @interactableSprites[rowId][colId] = @enemy.sprite
+                    @enemies.push(@enemy)
                 end
             end
         end
     end
 
     def update(character)
-
         moved = 0
         lastTileX = @sprites[0][@sprites[0].length - 1].x + TILE_SIZE
         firstTileX = @sprites[0][0].x
@@ -98,8 +103,10 @@ class Map
         if moved != 0
             @sprites.each_with_index do |row, rowId|
                 row.each_with_index do |sprite, colId|
-                    if @pointsSprites[rowId][colId]
-                        @pointsSprites[rowId][colId].x -= 80 * moved
+                    if @interactableSprites[rowId][colId]
+                        if @interactableSprites[rowId][colId]
+                            @interactableSprites[rowId][colId].x -= 80 * moved
+                        end
                     end
                     sprite.x -= 80 * moved
                 end
@@ -119,12 +126,24 @@ class Map
         @map[y][x] != 0
     end
 
+    def isMob?(posX, posY)
+        x = (posX + @cameraOffset) / TILE_SIZE
+        y = posY / TILE_SIZE
+
+        return false if x < 0 || y < 0
+        return false if y >= @interactable.length || x >= @interactable[0].length
+
+        @interactable[y][x] == 2
+    end
+
     def removePoint(posX, posY)
         x = (posX + @cameraOffset) / TILE_SIZE
         y = posY / TILE_SIZE
 
-        @points[y][x] = 0
-        @pointsSprites[y][x].remove
+        @interactable[y][x] = 0
+        if @interactableSprites[y][x]
+            @interactableSprites[y][x].remove
+        end
     end
 
     def isPointOnPos?(posX, posY)
@@ -132,8 +151,8 @@ class Map
         y = posY / TILE_SIZE
 
         return false if x < 0 || y < 0
-        return false if y >= @points.length || x >= @points[0].length
+        return false if y >= @interactable.length || x >= @interactable[0].length
 
-        @points[y][x] != 0
+        @interactable[y][x] == 1
     end
 end

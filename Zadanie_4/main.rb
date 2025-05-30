@@ -7,7 +7,9 @@ set width: 800, height: 600
 
 @map = nil
 @character = nil
-@scoreText = nil
+@coinsText = nil
+@pointsText = nil
+@enemy = nil
 @gameState = :menu
 
 @menuBackground = Sprite.new("sprites/main_menu/menu_bg.png", width: 800, height: 600)
@@ -37,8 +39,9 @@ def switch_to_game
     @map = Map.new
     @character = Character.new(100, 100)
 
-    @pointsIcon = Sprite.new('sprites/coin.png', width: 40, height: 40, x: 450, y: 10, z: 10, clip_width: 16)
-    @scoreText = Text.new("0", x: 490, y: 15, z: 10, size: 28, font: "font.ttf", color: 'white')
+    @coinsIcon = Sprite.new('sprites/coin.png', width: 40, height: 40, x: 450, y: 10, clip_width: 16)
+    @coinsText = Text.new("0", x: 490, y: 15, size: 28, font: "font.ttf", color: 'white')
+    @pointsText = Text.new("0", x: 290, y: 15, size: 28, font: "font.ttf", color: 'white')
 
     @gameState = :game
     @menuBackground.remove
@@ -65,7 +68,8 @@ update do
     if @gameState == :game
         @map.update(@character)
         @character.update(@map)
-        @scoreText.text = "#{@character.collectedPoints}"
+        @coinsText.text = "#{@character.collectedCoins}"
+        @pointsText.text = "#{@character.collectedPoints}"
 
         if @character.isAlive() == false
             switch_to_menu

@@ -8,7 +8,12 @@ class Character
         @speedY = 0
         @speedX = 0
         @onGround = true
+        @health = 3
+        @lastDamageTime = Time.at(0)
+        @damaged = false
+        @blinkFlag = true
         @isAlive = true
+        @collectedCoins = 0
         @collectedPoints = 0
         @sprite = Sprite.new(
             "sprites/mario.png",
@@ -56,7 +61,22 @@ class Character
     end
 
     def update(map)
-        collectPoints(map)
+        if @damaged
+            if Time.now - @lastDamageTime >= 3
+                @damaged = false
+                @sprite.color.opacity = 1
+            else
+                if @blinkFlag
+                    @sprite.color.opacity = 0.3
+                    @blinkFlag = false
+                else
+                    @sprite.color.opacity = 1
+                    @blinkFlag = true
+                end
+            end
+        end
+
+        collectCoins(map)
         handleMovement(map)
 
         @sprite.x = @posX
@@ -76,18 +96,37 @@ class Character
         @isAlive
     end
 
+    def collectedCoins
+        @collectedCoins
+    end
+
     def collectedPoints
         @collectedPoints
     end
 
-    def collectPoints(map)
+    def collectCoins(map)
 
         x = @posX + 20
         y = @posY + 20
 
         if map.isPointOnPos?(x, y)
-            @collectedPoints += 1
+            @collectedCoins += 1
             map.removePoint(x, y)
+        end
+    end
+
+    def takeDamage()
+        if Time.now - @lastDamageTime >= 3
+            @damaged = true
+
+            @health -= 1
+            @lastDamageTime = Time.now
+
+            if @health == 0
+            @isAlive = false
+            end
+
+            @speedY = -12
         end
     end
 
@@ -105,6 +144,12 @@ class Character
                     @isAlive = false
                     return
                 end
+                if map.isMob?(@posX, @posY + 40)|| map.isMob?(@posX + 40, @posY + 40)
+                    @speedY = -12
+                    map.removePoint(@posX + 40, @posY + 40)
+                    map.removePoint(@posX, @posY + 40)
+                    @collectedPoints += 150
+                end
                 @posY = new_posY
                 @speedY += 0.5
                 @onGround = false
@@ -112,7 +157,7 @@ class Character
         elsif @speedY < 0
             if map.isColliding?(@posX, new_posY) || map.isColliding?(@posX + 40, new_posY)
                 @posY = ((new_posY) / Map::TILE_SIZE).ceil * Map::TILE_SIZE
-                @speedY = 0 
+                @speedY = 0
             else
                 @posY = new_posY
                 @speedY += 0.5
@@ -130,6 +175,9 @@ class Character
                     @posX = ((new_posX) / Map::TILE_SIZE).ceil * Map::TILE_SIZE
                     @speedX = 0
                 else
+                    if map.isMob?(new_posX, @posY)|| map.isMob?(new_posX, @posY + 40)
+                        takeDamage()
+                    end
                     @posX = new_posX
                 end
             else
@@ -137,6 +185,9 @@ class Character
                     @posX = ((new_posX + 40) / Map::TILE_SIZE).floor * Map::TILE_SIZE - 40
                     @speedX = 0
                 else
+                    if map.isMob?(new_posX + 40, @posY)|| map.isMob?(new_posX + 40, @posY + 40)
+                        takeDamage()
+                    end
                     @posX = new_posX
                 end
             end
