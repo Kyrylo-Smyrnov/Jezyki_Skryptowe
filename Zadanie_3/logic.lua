@@ -4,6 +4,7 @@ local blocks = require("blocks")
 local consts = require("consts")
 local field = require("field")
 local vars = require("vars")
+local sounds = require("sounds")
 
 local function checkBlockCollision ()
     for y = 1, 4 do
@@ -50,6 +51,8 @@ local function clearFilledRows()
                 field[1][x] = 0
             end
             clearedRows = clearedRows + 1
+
+            sounds.lineSound:play()
         else
             y = y - 1
         end
@@ -88,6 +91,8 @@ local function mapBlockIntoField()
         end
     end
 
+    sounds.placedSound:play()
+
     clearFilledRows()
 end
 
@@ -121,6 +126,7 @@ local function spawnNewBlock()
 
     if not canPlaceShapeAt(shape, startX, startY) then
         vars.gameOver = true
+        sounds.gameOverSound:play()
         return
     end
 
@@ -253,6 +259,7 @@ function logic.handleInput(key)
         local rotated = rotateClockwise(shape)
         if canPlaceShapeAt(rotated, newX, newY) then
             vars.currentBlock.shape = rotated
+            sounds.rotateSound:play()
         end
         return
     elseif key == "s" then
@@ -261,6 +268,7 @@ function logic.handleInput(key)
 
     if canPlaceShapeAt(shape, newX, newY) then
         vars.currentBlock.x = newX
+        sounds.moveSound:play()
     end
 end
 

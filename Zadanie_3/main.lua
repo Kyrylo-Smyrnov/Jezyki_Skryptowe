@@ -3,6 +3,7 @@ local consts = require("consts")
 local field = require("field")
 local logic = require("logic")
 local vars = require("vars")
+local sounds = require("sounds")
 
 local menuBackground = nil
 local gameBackground = nil
@@ -126,9 +127,11 @@ end
 function love.mousepressed(x, y, button)
     if vars.gameState == "menu" and button == 1 then
         if x >= 300 and x <= 500 and y >= 300 and y <= 350 then
+            sounds.buttonClickSound:play()
             vars.gameState = "game"
             vars.isGameStarted = false
         elseif x >= 300 and x <= 500 and y >= 400 and y <= 450 then
+            sounds.buttonClickSound:play()
             logic.loadGame()
             vars.isGameStarted = true
             vars.gameState = "game"
@@ -136,6 +139,7 @@ function love.mousepressed(x, y, button)
     end
     if vars.gameOver == true and button == 1 then
         if x >= 300 and x <= 500 and y >= 500 and y <= 550 then
+            sounds.buttonClickSound:play()
             vars.gameState = "menu"
         end
     end
