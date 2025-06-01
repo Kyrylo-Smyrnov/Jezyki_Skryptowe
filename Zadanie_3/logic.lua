@@ -124,6 +124,7 @@ local function spawnNewBlock()
         return
     end
 
+    vars.currentBlock.id = blockNum
     vars.currentBlock.shape = shape
     vars.currentBlock.color = color
     vars.currentBlock.x = startX
@@ -170,6 +171,75 @@ local function canPlaceShapeAt(shape, posX, posY)
     return true
 end
 
+local function saveGame()
+    local file = io.open("Zadanie_3/save.txt", "w")
+
+    file:write(vars.currentBlock.id.. "\n")
+    file:write(vars.currentBlock.x.. "\n")
+    file:write(vars.currentBlock.y.. "\n")
+    file:write(vars.score.. "\n")
+
+    for y = 1, consts.FIELD_HEIGHT do
+        for x = 1, consts.FIELD_WIDHT do
+            file:write(field[y][x])
+            if x < consts.FIELD_WIDHT then
+                file:write(", ")
+            end
+        end
+        file:write("\n")
+    end
+
+    file:close()
+
+    vars.gameState = "menu"
+    vars.isGameStarted = false
+
+    field.reset()
+end
+
+function logic.loadGame()
+    field.reset()
+    vars.gameOver = false
+
+    local file = io.open("Zadanie_3/save.txt", "r")
+
+    vars.currentBlock.id = tonumber(file:read("*l"))
+    vars.currentBlock.shape = blocks[vars.currentBlock.id].shape
+    vars.currentBlock.color = blocks[vars.currentBlock.id].color
+    vars.currentBlock.x = tonumber(file:read("*l"))
+    vars.currentBlock.y = tonumber(file:read("*l"))
+
+    vars.score = tonumber(file:read("*l"))
+
+    for y = 1, consts.FIELD_HEIGHT do
+        local line = file:read("*l")
+        local values = {}
+
+        for value in string.gmatch(line, "%d+") do
+            table.insert(values, tonumber(value))
+        end
+
+        for x = 1, consts.FIELD_WIDHT do
+            field[y][x] = values[x] or 0
+        end
+    end
+
+    file:close()
+end
+
+function logic.startGame()
+    field.reset()
+    vars.gameOver = false
+    vars.score = 0
+    local firstBlockNum = logic.generateNextBlockNum()
+
+    vars.currentBlock.id = firstBlockNum
+    vars.currentBlock.shape = blocks[firstBlockNum].shape
+    vars.currentBlock.color = blocks[firstBlockNum].color
+    vars.currentBlock.x = consts.BLOCK_START_POINT.x
+    vars.currentBlock.y = consts.BLOCK_START_POINT.y
+end
+
 function logic.handleInput(key)
     local newX = vars.currentBlock.x
     local newY = vars.currentBlock.y
@@ -185,6 +255,8 @@ function logic.handleInput(key)
             vars.currentBlock.shape = rotated
         end
         return
+    elseif key == "s" then
+        saveGame()
     end
 
     if canPlaceShapeAt(shape, newX, newY) then

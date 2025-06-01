@@ -1,3 +1,5 @@
+local consts = require("consts")
+
 local field = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -20,5 +22,13 @@ local field = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 }
+
+function field.reset()
+    for y = 1, consts.FIELD_HEIGHT do
+        for x = 1, consts.FIELD_WIDHT do
+            field[y][x] = 0
+        end
+    end
+end
 
 return field

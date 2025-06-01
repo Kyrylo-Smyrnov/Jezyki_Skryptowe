@@ -1,11 +1,13 @@
 local vars = {}
 
 vars.currentBlock = {
-    shape = {}, x, y
+    id, shape = {}, x, y
 }
 
 vars.fallTimer = 0.5
 vars.score = 0
 vars.gameOver = false
+vars.gameState = "menu"
+vars.isGameStarted = false
 
 return vars
