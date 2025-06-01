@@ -20,7 +20,7 @@ zewnątrz) </br>
 [Kod](Zadanie_3/) </br>
 :white_check_mark: 3.0 (Postawowa wersja dekstopowa z obsługą na klawiaturze - minimum 4
 rodzaje klocków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/48347a74caacad90d63fdabb31135324deb384d5) </br>
-:x: 3.5 (Zapis i odczyt gier) </br>
+:white_check_mark: 3.5 (Zapis i odczyt gier) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/704e5c6f8d3261bb057b9db28126d81f8050a438) </br>
 :x: 4.0 (Dodanie efektów dźwiękowych przy akcjach) </br>
 :x: 4.5 (Dodanie animacji przy zbijaniu klocków) </br>
 :x: 5.0 (Wersja na iOS lub Android z implementacją touch zamiast klawiatury) </br>
