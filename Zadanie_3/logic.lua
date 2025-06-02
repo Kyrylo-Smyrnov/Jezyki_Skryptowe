@@ -27,11 +27,11 @@ local function isSameColor(a, b)
     return a[1] == b[1] and a[2] == b[2] and a[3] == b[3]
 end
 
-local function clearFilledRows()
+local function markRowsToClear()
     local clearedRows = 0
-    local y = consts.FIELD_HEIGHT
+    vars.clearedRows = {}
 
-    while y >= 1 do
+    for y = consts.FIELD_HEIGHT, 1, -1 do
         local full = true
         for x = 1, consts.FIELD_WIDHT do
             if field[y][x] == 0 then
@@ -41,24 +41,17 @@ local function clearFilledRows()
         end
 
         if full then
-            for moveY = y, 2, -1 do
-                for x = 1, consts.FIELD_WIDHT do
-                    field[moveY][x] = field[moveY - 1][x]
-                end
-            end
-
-            for x = 1, consts.FIELD_WIDHT do
-                field[1][x] = 0
-            end
+            vars.clearedRows[y] = true
             clearedRows = clearedRows + 1
-
-            sounds.lineSound:play()
-        else
-            y = y - 1
         end
     end
 
-    vars.score = vars.score + clearedRows * 100
+    if clearedRows > 0 then
+        vars.clearing = true
+        vars.clearingTimer = 1.5
+        sounds.lineSound:play()
+        vars.score = vars.score + clearedRows * 100
+    end
 end
 
 local function mapBlockIntoField()
@@ -93,7 +86,7 @@ local function mapBlockIntoField()
 
     sounds.placedSound:play()
 
-    clearFilledRows()
+    markRowsToClear()
 end
 
 local function canPlaceShapeAt(shape, posX, posY)
@@ -272,9 +265,44 @@ function logic.handleInput(key)
     end
 end
 
-function logic.updateTimer (dt)
-    vars.fallTimer = vars.fallTimer - dt
+function logic.updateTimer(dt)
+    dt = math.min(dt, 0.1)
 
+    if vars.clearing then
+        vars.clearingTimer = vars.clearingTimer - dt
+        if vars.clearingTimer <= 0 then
+            local newField = {}
+            local dstY = consts.FIELD_HEIGHT
+
+            for y = 1, consts.FIELD_HEIGHT do
+                newField[y] = {}
+                for x = 1, consts.FIELD_WIDHT do
+                    newField[y][x] = 0
+                end
+            end
+
+            for y = consts.FIELD_HEIGHT, 1, -1 do
+                if not vars.clearedRows[y] then
+                    for x = 1, consts.FIELD_WIDHT do
+                        newField[dstY][x] = field[y][x]
+                    end
+                    dstY = dstY - 1
+                end
+            end
+
+            for y = 1, consts.FIELD_HEIGHT do
+                for x = 1, consts.FIELD_WIDHT do
+                    field[y][x] = newField[y][x]
+                end
+            end
+
+            vars.clearing = false
+            vars.clearedRows = {}
+        end
+        return
+    end
+
+    vars.fallTimer = vars.fallTimer - dt
     if vars.fallTimer <= 0 then
         lowerCurrentBlock()
         vars.fallTimer = consts.FALL_RATE

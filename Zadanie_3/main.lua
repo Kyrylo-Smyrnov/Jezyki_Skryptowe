@@ -71,17 +71,29 @@ local function drawGame()
                 love.graphics.rectangle("fill", (x - 1) * consts.BLOCK_SIZE + (consts.WINDOW_WIDTH / 2 - consts.BLOCK_SIZE * consts.FIELD_WIDHT / 2),
                                                 (y - 1) * consts.BLOCK_SIZE + (consts.WINDOW_HEIGHT / 2 - consts.BLOCK_SIZE * consts.FIELD_HEIGHT / 2),
                                                 consts.BLOCK_SIZE, consts.BLOCK_SIZE, nil, nil, nil)
+
+                local blink = not vars.clearing or (math.floor(love.timer.getTime() * 10) % 2 == 0)
+
+                if vars.clearedRows and vars.clearedRows[y] == true and blink then
+                    love.graphics.setColor(1, 1, 1, 0.7)
+                    love.graphics.rectangle("fill", (x - 1) * consts.BLOCK_SIZE + (consts.WINDOW_WIDTH / 2 - consts.BLOCK_SIZE * consts.FIELD_WIDHT / 2), 
+                                                    (y - 1) * consts.BLOCK_SIZE + (consts.WINDOW_HEIGHT / 2 - consts.BLOCK_SIZE * consts.FIELD_HEIGHT / 2),
+                                                    consts.BLOCK_SIZE, consts.BLOCK_SIZE)
+                end
             end
         end
     end
 
-    for y = 1, 4 do
-        for x = 1, 4 do
-            if vars.currentBlock.shape[y][x] == 1 then
-                love.graphics.setColor(vars.currentBlock.color)
-                love.graphics.rectangle("fill", vars.currentBlock.x + (x - 1) * consts.BLOCK_SIZE,
-                                                vars.currentBlock.y + (y - 1) * consts.BLOCK_SIZE,
-                                                consts.BLOCK_SIZE, consts.BLOCK_SIZE, nil, nil, nil)
+    if not vars.clearing then
+        for y = 1, 4 do
+            for x = 1, 4 do
+                if vars.currentBlock.shape[y][x] == 1 then
+                    love.graphics.setColor(vars.currentBlock.color)
+                    love.graphics.rectangle("fill",
+                        vars.currentBlock.x + (x - 1) * consts.BLOCK_SIZE,
+                        vars.currentBlock.y + (y - 1) * consts.BLOCK_SIZE,
+                        consts.BLOCK_SIZE, consts.BLOCK_SIZE)
+                end
             end
         end
     end
