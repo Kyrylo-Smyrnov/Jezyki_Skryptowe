@@ -22,7 +22,7 @@ zewnątrz) </br>
 rodzaje klocków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/48347a74caacad90d63fdabb31135324deb384d5) </br>
 :white_check_mark: 3.5 (Zapis i odczyt gier) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/704e5c6f8d3261bb057b9db28126d81f8050a438) </br>
 :white_check_mark: 4.0 (Dodanie efektów dźwiękowych przy akcjach) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/8c8b9f1f234694b4a18b9f69b18fc47c1c735f01) </br>
-:x: 4.5 (Dodanie animacji przy zbijaniu klocków) </br>
+:white_check_mark: 4.5 (Dodanie animacji przy zbijaniu klocków) [Link](https://github.com/Kyrylo-Smyrnov/Jezyki_Skryptowe/commit/4d171cc9f3706d2989abadb7d87a2119ecdfb301) </br>
 :x: 5.0 (Wersja na iOS lub Android z implementacją touch zamiast klawiatury) </br>
 
 **Zadanie 4: [Ruby] Mario w Ruby2d**
