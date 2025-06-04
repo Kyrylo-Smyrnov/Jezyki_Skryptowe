@@ -139,7 +139,7 @@ local function lowerCurrentBlock ()
     end
 end
 
-local function rotateClockwise(shape)
+function logic.rotateClockwise(shape)
     local newShape = {}
     for y = 1, 4 do
         newShape[y] = {}
@@ -150,7 +150,7 @@ local function rotateClockwise(shape)
     return newShape
 end
 
-local function canPlaceShapeAt(shape, posX, posY)
+function logic.canPlaceShapeAt(shape, posX, posY)
     for y = 1, 4 do
         for x = 1, 4 do
             if shape[y][x] == 1 then
@@ -170,7 +170,7 @@ local function canPlaceShapeAt(shape, posX, posY)
     return true
 end
 
-local function saveGame()
+function logic.saveGame()
     local file = io.open("Zadanie_3/save.txt", "w")
 
     file:write(vars.currentBlock.id.. "\n")
@@ -237,32 +237,6 @@ function logic.startGame()
     vars.currentBlock.color = blocks[firstBlockNum].color
     vars.currentBlock.x = consts.BLOCK_START_POINT.x
     vars.currentBlock.y = consts.BLOCK_START_POINT.y
-end
-
-function logic.handleInput(key)
-    local newX = vars.currentBlock.x
-    local newY = vars.currentBlock.y
-    local shape = vars.currentBlock.shape
-
-    if key == "left" then
-        newX = vars.currentBlock.x - consts.BLOCK_SIZE
-    elseif key == "right" then
-        newX = vars.currentBlock.x + consts.BLOCK_SIZE
-    elseif key == "space" then
-        local rotated = rotateClockwise(shape)
-        if canPlaceShapeAt(rotated, newX, newY) then
-            vars.currentBlock.shape = rotated
-            sounds.rotateSound:play()
-        end
-        return
-    elseif key == "s" then
-        saveGame()
-    end
-
-    if canPlaceShapeAt(shape, newX, newY) then
-        vars.currentBlock.x = newX
-        sounds.moveSound:play()
-    end
 end
 
 function logic.updateTimer(dt)

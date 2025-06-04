@@ -132,10 +132,6 @@ function love.draw()
     end
 end
 
-function love.keypressed(key)
-    logic.handleInput(key)
-end
-
 function love.mousepressed(x, y, button)
     if vars.gameState == "menu" and button == 1 then
         if x >= 300 and x <= 500 and y >= 300 and y <= 350 then
@@ -155,4 +151,71 @@ function love.mousepressed(x, y, button)
             vars.gameState = "menu"
         end
     end
+end
+
+local function handleKey(key)
+    local newX = vars.currentBlock.x
+    local newY = vars.currentBlock.y
+    local shape = vars.currentBlock.shape
+
+    if key == "left" then
+        newX = vars.currentBlock.x - consts.BLOCK_SIZE
+    elseif key == "right" then
+        newX = vars.currentBlock.x + consts.BLOCK_SIZE
+    elseif key == "space" then
+        local rotated = logic.rotateClockwise(shape)
+        if logic.canPlaceShapeAt(rotated, newX, newY) then
+            vars.currentBlock.shape = rotated
+            sounds.rotateSound:play()
+        end
+        return
+    elseif key == "s" then
+        logic.saveGame()
+    end
+
+    if logic.canPlaceShapeAt(shape, newX, newY) then
+        vars.currentBlock.x = newX
+        sounds.moveSound:play()
+    end
+end
+
+local function handleTouchInput(x, y)
+    local minY = consts.WINDOW_HEIGHT - 100
+
+    if x >= 50 and x <= 150 and y >= minY and y <= minY + 80 then
+        handleKey("left")
+    elseif x >= 200 and x <= 300 and y >= minY and y <= minY + 80 then
+        handleKey("right")
+    elseif x >= 350 and x <= 450 and y >= minY and y <= minY + 80 then
+        handleKey("space")
+    end
+end
+
+function love.touchpressed(id, tx, ty, dx, dy, pressure)
+    local x = tx * consts.WINDOW_WIDTH
+    local y = ty * consts.WINDOW_HEIGHT
+
+    if vars.gameState == "menu" then
+        if x >= 300 and x <= 500 and y >= 300 and y <= 350 then
+            sounds.buttonClickSound:play()
+            vars.gameState = "game"
+            vars.isGameStarted = false
+        elseif x >= 300 and x <= 500 and y >= 400 and y <= 450 then
+            sounds.buttonClickSound:play()
+            logic.loadGame()
+            vars.isGameStarted = true
+            vars.gameState = "game"
+        end
+    elseif vars.gameOver == true then
+        if x >= 300 and x <= 500 and y >= 500 and y <= 550 then
+            sounds.buttonClickSound:play()
+            vars.gameState = "menu"
+        end
+    else
+        handleTouchInput(x, y)
+    end
+end
+
+function love.keypressed(key)
+    handleKey(key)
 end
